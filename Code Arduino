@@ -1,0 +1,39 @@
+
+#include <Servo.h>      // bibliotheek servo
+
+Servo myservo;          //we noemen de servo myservo
+int knop1 = 2;          //knop1 op pin 2
+int knop2 = 3;          // knop2 op pin 3
+int toestandknop1 = 0;  // de toestand van knop1 is een variabele
+int toestandknop2 = 0;  // de toestand van knop2 is een variabele
+int pos = 0;            // de positie van de servo is een variabele
+int led = 12;
+int led2 = 11;
+int led3 = 10;
+
+void setup() {
+  pinMode (knop1, INPUT); // knop1 is een INPUT
+  pinMode (knop2, INPUT); // knop2 is een INPUT
+  myservo.attach(9);      // de servo is verbonden met pin 9
+  pinMode(led, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+}
+
+
+void loop()
+{
+  toestandknop1 = digitalRead(knop1); // lees knop1
+  toestandknop2 = digitalRead(knop2); // lees knop2
+  if (toestandknop1 == HIGH) {        // als knop1 wordt ingedrukt
+    digitalWrite(led, HIGH);
+    digitalWrite(led2, LOW);
+    myservo.write(180);               // ga naar positie 180
+    delay(15);                        // wacht tot de servo er is
+  } else if (toestandknop2 == HIGH) { // als knop2 ingedrukt wordt doe iets anders..
+    digitalWrite(led, LOW);
+    digitalWrite(led2, HIGH);
+    myservo.write(0);                 // ga naar positie 0
+    delay(15);                        // wacht tot de servo er is
+  }
+}
